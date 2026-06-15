@@ -24,6 +24,7 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.getAllBookings());
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Booking> getBookingById(@PathVariable Long id) {
         return bookingService.getBookingById(id)
@@ -37,7 +38,7 @@ public class BookingController {
     }
 
     @PostMapping
-    public ResponseEntity<Booking> createBooking(@RequestBody Booking booking) {
+    public ResponseEntity<Booking> createBooking(@Valid @RequestBody Booking booking) {
         Booking created = bookingService.createBooking(booking);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);//201
         //return ResponseEntity.ok(created); 200
@@ -47,6 +48,5 @@ public class BookingController {
     public ResponseEntity<Void> cancelBooking(@PathVariable Long id) {
         bookingService.cancelBooking(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-
     }
 }
